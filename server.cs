@@ -19,6 +19,7 @@ exec("./christmas2023.cs");
 exec("./achievements.cs");
 exec("./advancedCrafting.cs");
 exec("./blockheadprime/server.cs");
+exec("./diggerWeapon/server.cs");
 
 datablock AudioProfile(achievement1)
 {
