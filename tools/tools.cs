@@ -1,0 +1,11 @@
+exec("./pickaxe/server.cs");
+exec("./dynamite/server.cs");
+exec("./jackhammer/server.cs");
+exec("./laserdrill/server.cs");
+exec("./tntlauncher/server.cs");
+exec("./cobaltcannon/server.cs");
+exec("./granddesign/server.cs");
+exec("./geolocator/server.cs");
+exec("./flakvest/server.cs");
+exec("./mininghelmet/server.cs");
+exec("./cryogenumtank/server.cs");
