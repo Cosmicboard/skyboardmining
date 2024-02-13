@@ -71,6 +71,13 @@ package mining
         {
             %client.chatmessage("\c2wake up babe new update dropped");
             %client.chatmessage("\c6a new update \c5(" @ $serverVersion - %client.changeloginfo @ ")\c6 has been made since you were last online on this server, check it out with the \c0/changelog latest \c6command");
+            if(%client.changeloginfo < 15)
+            {
+                %client.chatmessage("\c0only people who at least prestiged once should read this, otherwise you can disregard this (i know you will read it anyways)");
+                %client.chatmessage("\c0after the v1.08 update, your prestige upgrades have been reverted back into prestige points due to changes in upgrade prices");
+                %client.chatmessage("\c0this message will appear only once lolololololo (i believe that your attention span is higher than 3.672 seconds)");
+                %client.playsound(beep_checkout_sound);
+            }
             %client.changeloginfo = $serverVersion;
             %client.updatechangeloginfo();
         }

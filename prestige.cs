@@ -62,18 +62,99 @@ function gameconnection::respecprestigetoggle(%client, %type)
 
 registeroutputevent("gameconnection", "respecPrestigeToggle");
 
+function fixSaveFiles()
+{
+    %fw = new FileObject();
+    for(%file = findfirstfile("config/server/mining/*/prestige.txt"); isfile(%file); %file = findnextfile("config/server/mining/*/prestige.txt"))
+    {
+        if(strchr(%file, "BACKUP 1") !$= "" || strchr(%file, "BACKUP 2") !$= "" || strchr(%file, "BACKUP 3") !$= ""  || strchr(%file, "dev") !$= "")
+            continue;
+        %fw.openForRead(%file);
+        %points = 0;
+        %prestige = %fw.readline();
+        %prestigePoints = %fw.readline();
+        %mpu = %fw.readline()/5;
+        %mmu = mceil(%fw.readline()/0.05);
+        %eu = %fw.readline()/0.1;
+        %cu = %fw.readline()/0.1;
+        %cdu = %fw.readline()/0.1;
+        %slu = %fw.readline();
+        %mmmu = %fw.readline()/0.1;
+        %pu = %fw.readline()/0.15;
+        %tu = mceil(%fw.readline()/0.45);
+        %fw.readline();
+        %tcd = mceil(%fw.readline()/2.5);
+        %sod = %fw.readline();
+        for(%i = 1; %i <= %mpu; %i++)
+        {
+            %points += %i;
+        }
+        for(%i = 1; %i <= %mmu; %i++)
+        {
+            %points += 1 + ((%i-1)*5) - (2 * (%i-1));
+        }
+        for(%i = 1; %i <= %eu; %i++)
+        {
+            %points += 1 + ((%i-1)*10/5);
+        }
+        for(%i = 1; %i <= %cu; %i++)
+        {
+            %points += 1 + ((%i-1)*10/5);
+        }
+        for(%i = 1; %i <= %cdu; %i++)
+        {
+            %points += mfloatlength(2 * (mpow((1+(%i-1)/10)*100,2.2))/2500,0)-10;
+        }
+        for(%i = 1; %i <= %slu; %i++)
+        {
+            %points += mpow(5,%i);
+        }
+        for(%i = 1; %i <= %mmmu; %i++)
+        {
+            %points += 1 + mfloatlength((mpow((%i-1)*10,1.15)/1.5),0);
+        }
+        for(%i = 1; %i <= %pu; %i++)
+        {
+            if(%i == 1)
+                %points += 15;
+            else
+                %points += mfloatlength(15 + (%i-1)*0.15*35,0);
+        }
+        for(%i = 1; %i <= %tu; %i++)
+        {
+            %points += mfloatlength(15 + mpow((%i-1)*45,0.6)*1.5,0);
+        }
+        for(%i = 1; %i <= %tcd; %i++)
+        {
+            %points += mfloatlength(10 + mpow((%i-1)*2.5,0.8)*1.25,0);
+        }
+        for(%i = 1; %i <= %sod; %i++)
+        {
+            %points += 14 + mpow(4,1+%i);
+        }
+        if(%points > 0)
+        {
+            %fw.openForWrite(%file);
+            %fw.writeline(%prestige);
+            %fw.writeline(%points);
+        }
+    }
+    %fw.close();
+    %fw.delete();
+}
+
 function gameconnection::respecPrestigePoints(%client, %count)
 {
     %mpu = %client.prestigeminingpower/5;
-    %mmu = mceil(%client.prestigeminingmultiplier/0.05);
+    %mmu = mfloatlength(%client.prestigeminingmultiplier/0.05,0);
     %eu= %client.prestigeexpbonus/0.1;
     %cu = %client.prestigecashbonus/0.1;
     %cdu = %client.prestigecratedrops/0.1;
     %slu = %client.prestigestartlevel;
     %mmmu = %client.prestigemaxmining/0.1;
     %pu = %client.prestigepointsbuff/0.15;
-    %tu = mceil(%client.tunnelerlavares/0.45);
-    %tcd = mceil(%client.tunnelercooldown/2.5);
+    %tu = mfloatlength(%client.tunnelerlavares/0.45,0);
+    %tcd = mfloatlength(%client.tunnelercooldown/2.5,0);
     %sod = %client.prestigestartdepth;
 
     for(%i = 1; %i <= %mpu; %i++)
@@ -83,10 +164,10 @@ function gameconnection::respecPrestigePoints(%client, %count)
             %client.prestigeminingpower -= 5;
             if(%client.prestigeminingpower < 0)
                 %client.prestigeminingpower = 0;
-            %client.prestigepoints += 1 + (%client.prestigeminingpower/5);
+            %client.prestigepoints += 1 + mfloatlength((%client.prestigeminingpower/3),0);
         }
         else
-            %points += 1 + (%i*5);
+            %points += 1 + mfloatlength((%i-1)*5/3,0);
     }
     for(%i = 1; %i <= %mmu; %i++)
     {
@@ -95,10 +176,10 @@ function gameconnection::respecPrestigePoints(%client, %count)
             %client.prestigeminingmultiplier -= 0.05;
             if(%client.prestigeminingmultiplier < 0)
                 %client.prestigeminingmultiplier = 0;
-            %client.prestigepoints += 1 + (%client.prestigeminingmultiplier*100) - (2 * ((%client.prestigeminingmultiplier*100)/5));
+            %client.prestigepoints += 10 + (%client.prestigeminingmultiplier*400) - (2 * ((%client.prestigeminingmultiplier*100)/5));
         }
         else
-            %points += 1 + (%i*5) - (2 * %i);
+            %points += 3 + ((%i-1)*40) - (2 * (%i-1));
     }
     for(%i = 1; %i <= %eu; %i++)
     {
@@ -107,10 +188,10 @@ function gameconnection::respecPrestigePoints(%client, %count)
             %client.prestigeexpbonus -= 0.1;
             if(%client.prestigeexpbonus < 0)
                 %client.prestigeexpbonus = 0;
-            %client.prestigepoints += 1 + (%client.prestigeexpbonus*100/5);
+            %client.prestigepoints += 1 + mfloatlength(mpow((%client.prestigeexpbonus*100/4),1.08),0);
         }
         else
-            %points += 1 + (%i*10/5);
+            %points += 1 + mfloatlength(mpow(((%i-1)*10/4),1.08),0);
     }
     for(%i = 1; %i <= %cu; %i++)
     {
@@ -119,10 +200,10 @@ function gameconnection::respecPrestigePoints(%client, %count)
             %client.prestigecashbonus -= 0.1;
             if(%client.prestigecashbonus < 0)
                 %client.prestigecashbonus = 0;
-            %client.prestigepoints += 1 + (%client.prestigecashbonus*100/5);
+            %client.prestigepoints += 1 + mfloatlength(mpow((%client.prestigecashbonus*100/4),1.08),0);
         }
         else
-            %points += 1 + (%i*10/5);
+            %points += 1 + mfloatlength(mpow(((%i-1)*10/4),1.08),0);
     }
     for(%i = 1; %i <= %cdu; %i++)
     {
@@ -134,7 +215,7 @@ function gameconnection::respecPrestigePoints(%client, %count)
             %client.prestigepoints += mfloatlength(2 * (mpow((1+%client.prestigecratedrops)*100,2.2))/2500,0)-10;
         }
         else
-            %points += mfloatlength(2 * (mpow((%i*0.1)*100,2.2))/2500,0)-10;
+            %points += mfloatlength(2 * (mpow((1+(%i-1)/10)*100,2.2))/2500,0)-10;
     }
     for(%i = 1; %i <= %slu; %i++)
     {
@@ -158,7 +239,7 @@ function gameconnection::respecPrestigePoints(%client, %count)
             %client.prestigepoints += 1 + mfloatlength((mpow(%client.prestigemaxmining*100,1.15)/1.5),0);
         }
         else
-            %points += 1 + mfloatlength((mpow(%i*10,1.15)/1.5),0);
+            %points += 1 + mfloatlength((mpow((%i-1)*10,1.15)/1.5),0);
     }
     for(%i = 1; %i <= %pu; %i++)
     {
@@ -167,18 +248,17 @@ function gameconnection::respecPrestigePoints(%client, %count)
             %client.prestigepointsbuff -= 0.15;
             if(%client.prestigepointsbuff < 0)
                 %client.prestigepointsbuff = 0;
-            %price = mfloatlength(15 + %client.prestigepointsbuff*35,0);
-            if(%price == 0)
+            %price = mfloatlength(mpow(15 + %client.prestigepointsbuff*35,1.08),0);
+            if(%i == %pu)
                 %price = 15;
             %client.prestigepoints += %price;
         }
         else
         {
-            %test = mfloatlength(15 + %i*0.15*35,0);
-            if(%test == 0)
+            if(%i == 1)
                 %points += 15;
             else
-                %points += mfloatlength(15 + %i*0.15*35,0);
+                %points += mfloatlength(mpow(15 + (%i-1)*0.15*35,1.08),0);
         }
     }
     for(%i = 1; %i <= %tu; %i++)
@@ -191,7 +271,7 @@ function gameconnection::respecPrestigePoints(%client, %count)
             %client.prestigepoints += mfloatlength(15 + mpow(%client.tunnelerlavares*100,0.6)*1.5,0);
         }
         else
-            %points += mfloatlength(15 + mpow(%i*45,0.6)*1.5,0);
+            %points += mfloatlength(15 + mpow((%i-1)*45,0.6)*1.5,0);
     }
     for(%i = 1; %i <= %tcd; %i++)
     {
@@ -203,7 +283,7 @@ function gameconnection::respecPrestigePoints(%client, %count)
             %client.prestigepoints += mfloatlength(10 + mpow(%client.tunnelercooldown,0.8)*1.25,0);
         }
         else
-            %points += mfloatlength(10 + mpow(%i*2.5,0.8)*1.25,0);
+            %points += mfloatlength(10 + mpow((%i-1)*2.5,0.8)*1.25,0);
     }
     for(%i = 1; %i <= %sod; %i++)
     {
@@ -212,10 +292,10 @@ function gameconnection::respecPrestigePoints(%client, %count)
             %client.prestigestartdepth -= 1;
             if(%client.prestigestartdepth < 0)
                 %client.prestigestartdepth = 0;
-            %client.prestigepoints += 14 + mpow(4,1+%client.prestigestartdepth);
+            %client.prestigepoints += 14 + mpow(4,2+%client.prestigestartdepth);
         }
         else
-            %points += 14 + mpow(4,2+%i);
+            %points += 14 + mpow(4,1+%i);
     }
     if(%count)
         return %points;
@@ -225,22 +305,22 @@ function gameconnection::showPrestigeStats(%client, %option)
 {
     if(%option == 0)
     {
-        %price = 1 + (%client.prestigeminingpower/5);
+        %price = 1 + mfloatlength((%client.prestigeminingpower/3),0);
         %client.centerprint("<font:arial bold:26>\c6+5 Bonus Mining Power" NL "\c3Price:" SPC %price NL "<font:arial bold:20>\c5You currently have:" SPC 10+mfloor(%client.prestigeminingpower) NL "\c2Prestige Points:" SPC %client.prestigepoints,1);
     }
     else if(%option == 1)
     {
-        %price = 1 + (%client.prestigeminingmultiplier*100) - (2 * ((%client.prestigeminingmultiplier*100)/5));
+        %price = 10 + (%client.prestigeminingmultiplier*400) - (2 * ((%client.prestigeminingmultiplier*100)/5));
         %client.centerprint("<font:arial bold:26>\c6+5% Bonus Mining Multiplier" NL "\c3Price:" SPC %price NL "<font:arial bold:20>\c5You currently have:" SPC mfloor(%client.prestigeminingmultiplier*100) @ "%" NL "\c2Prestige Points:" SPC %client.prestigepoints,1);
     }
     else if(%option == 2)
     {
-        %price = 1 + (%client.prestigeexpbonus*100/5);
+        %price = 1 + mfloatlength(mpow((%client.prestigeexpbonus*100/4),1.08),0);
         %client.centerprint("<font:arial bold:26>\c6+10% Bonus Exp Multiplier" NL "\c3Price:" SPC %price NL "<font:arial bold:20>\c5You currently have:" SPC mfloor(%client.prestigeexpbonus*100) @ "%" NL "\c2Prestige Points:" SPC %client.prestigepoints,1);
     }
     else if(%option == 3)
     {
-        %price = 1 + (%client.prestigecashbonus*100/5);
+        %price = 1 + mfloatlength(mpow((%client.prestigecashbonus*100/4),1.08),0);
         %client.centerprint("<font:arial bold:26>\c6+10% Bonus Cash Multiplier" NL "\c3Price:" SPC %price NL "<font:arial bold:20>\c5You currently have:" SPC mfloor(%client.prestigecashbonus*100) @ "%" NL "\c2Prestige Points:" SPC %client.prestigepoints,1);
     }
     else if(%option == 4)
@@ -260,8 +340,8 @@ function gameconnection::showPrestigeStats(%client, %option)
     }
     else if(%option == 7)
     {
-        %price = mfloatlength(15 + %client.prestigepointsbuff*35,0);
-        if(%price == 0)
+        %price = mfloatlength(mpow(15 + %client.prestigepointsbuff*35,1.08),0);
+        if(%price == 19)
             %price = 15;
         %client.centerprint("<font:arial bold:26>\c6+15% Prestige Points from Prestiges" NL "\c3Price:" SPC %price NL "<font:arial bold:20>\c5You currently have:" SPC 100 + mfloor(%client.prestigepointsbuff*100) @ "%" NL "\c2Prestige Points:" SPC %client.prestigepoints NL "\c0(MAX UP TO 1000%)",1);
     }
@@ -298,7 +378,7 @@ function gameconnection::purchasePrestigeUpgrade(%client, %option)
 {
     if(%option == 0)
     {
-        %price = 1 + (%client.prestigeminingpower/5);
+        %price = 1 + mfloatlength((%client.prestigeminingpower/3),0);
         if(%client.prestigepoints < %price)
         {
             %client.chatmessage("no money no funny");
@@ -312,7 +392,7 @@ function gameconnection::purchasePrestigeUpgrade(%client, %option)
     }
     else if(%option == 1)
     {
-        %price = 1 + (%client.prestigeminingmultiplier*100) - (2 * ((%client.prestigeminingmultiplier*100)/5));
+        %price = 10 + (%client.prestigeminingmultiplier*400) - (2 * ((%client.prestigeminingmultiplier*100)/5));
         if(%client.prestigepoints < %price)
         {
             %client.chatmessage("no money no funny");
@@ -326,7 +406,7 @@ function gameconnection::purchasePrestigeUpgrade(%client, %option)
     }
     else if(%option == 2)
     {
-        %price = 1 + (%client.prestigeexpbonus*100/5);
+        %price = 1 + mfloatlength(mpow((%client.prestigeexpbonus*100/4),1.08),0);
         if(%client.prestigepoints < %price)
         {
             %client.chatmessage("no money no funny");
@@ -340,7 +420,7 @@ function gameconnection::purchasePrestigeUpgrade(%client, %option)
     }
     else if(%option == 3)
     {
-        %price = 1 + (%client.prestigecashbonus*100/5);
+        %price = 1 + mfloatlength(mpow((%client.prestigecashbonus*100/4),1.08),0);
         if(%client.prestigepoints < %price)
         {
             %client.chatmessage("no money no funny");
@@ -413,8 +493,8 @@ function gameconnection::purchasePrestigeUpgrade(%client, %option)
             %client.playsound(errorsound);
             return;
         }
-        %price = mfloatlength(15 + %client.prestigepointsbuff*35,0);
-        if(%price == 0)
+        %price = mfloatlength(mpow(15 + %client.prestigepointsbuff*35,1.08),0);
+        if(%price == 19)
             %price = 15;
         if(%client.prestigepoints < %price)
         {

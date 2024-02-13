@@ -19,7 +19,7 @@ function servercmdchangelog(%client, %ver)
         %client.chatmessage("\c3minor update 12 - v1.071 - 07.12.2023");
         %client.chatmessage("\c3rebalances 13 - v1.072 - 08.12.2023");
         %client.chatmessage("\c3minor update 14 - v1.073 - 23.01.2024");
-        %client.chatmessage("\c3major update 15 - v1.1 - 14.02.2024");
+        %client.chatmessage("\c3the updatening part I (vID: 15) - v1.08 - 14.02.2024");
         %client.chatmessage("\c5type \c0/changelog [update number] \c5or \c0/changelog latest \c5to view changes that are specific to that update");
     }
     else if(%ver == 1)
@@ -301,8 +301,43 @@ function servercmdchangelog(%client, %ver)
     }
     else if(%ver == 15 || %ver $= "latest")
     {
-        %client.chatmessage("\c514.02.2024 - major update");
+        %client.chatmessage("\c514.02.2024 - the updatening part I");
         %client.chatmessage("\c3--- new additions ---");
+        %client.chatmessage("\c0reverted everyone's prestige upgrades back into prestige points because all of the upgrades had their prices changed");
+        %client.chatmessage("\c0the leaderboard was also reset because it doesn't update in real time :3 (nice coding)");
+        %client.chatmessage("\c1--- ACHIEVEMENTS ---");
+        %client.chatmessage("\c2achievements now exist to encourage more brain activity");
+        %client.chatmessage("\c2they will grant permament buffs depending on how rare the achievement is");
+        %client.chatmessage("\c6added more tips");
+        %client.chatmessage("\c6ores can now sometimes generate in veins");
+        %client.chatmessage("\c3--- changes ---");
+        %client.chatmessage("\c6winter event is gone");
+        %client.chatmessage("\c6changed voidstone's texture so you can actually see a damn thing in the void layer");
+        %client.chatmessage("\c6capped max starting level prestige upgrade at 5");
+        %client.chatmessage("\c6reduced health scaling for challenged digger boss");
+        %client.chatmessage("\c6rebalanced tunneler to be more viable at lower levels");
+        %client.chatmessage("\c6increased ore requirements for lower tier pickaxes");
+        %client.chatmessage("\c6improved pickaxe shop house model");
+        %client.chatmessage("\c6/buyexp price now increases with the amount of prestige cash bonuses");
+        %client.chatmessage("\c6caves will generate slower at higher player counts to reduce server lag");
+        %client.chatmessage("\c6reworked torch placement code to be more stable");
+        %client.chatmessage("\c6removed value from dirt type ores");
+        %client.chatmessage("\c6remodelled snowglobe");
+        %client.chatmessage("\c3--- bug fixes ---");
+        %client.chatmessage("\c6fixed incorrect leaderboard prestige points scaling (for real this time holy shit)");
+        %client.chatmessage("\c6fixed slightly incorrect upgrades to prestige points conversion");
+        %client.chatmessage("\c6fixed shopkeeper's dialogue");
+        %client.chatmessage("\c6fixed server crashing if someone has too many levels when fighting the digger boss");
+        %client.chatmessage("\c6fixed challenged digger boss not spawning with his pickaxe");
+        %client.chatmessage("\c6fixed being able to trade decimal amount of ores");
+        %client.chatmessage("\c6fixed /declinetrade not prompting you with a message");
+        %client.chatmessage("\c6fixed trades being timeout'd even after declining them");
+        %client.chatmessage("\c6fixed equipped cosmetics not saving");
+        %client.chatmessage("\c6fixed real bedrock being unbreakable");
+    }
+    else if(%ver $= "secret")
+    {
+        %client.chatmessage("\c520.02.2024 - major update");
         %client.chatmessage("\c1--- THE BLACKSMITH ---");
         %client.chatmessage("\c2introducing a whole new building to the spawn location called the blacksmith");
         %client.chatmessage("\c2adds a WHOLE new variety to the crafting options and new crafted materials make use of the inventory");
@@ -319,30 +354,5 @@ function servercmdchangelog(%client, %ver)
         %client.chatmessage("\c1--- DRILLS ---");
         %client.chatmessage("\c2the grand design allows you to construct bigger drills to do the job for you!!!");
         %client.chatmessage("\c2differences being, they use up fuel in order to keep running so they can drill by themselves");
-        %client.chatmessage("\c1--- ACHIEVEMENTS ---");
-        %client.chatmessage("\c2achievements now exist to encourage more brain activity");
-        %client.chatmessage("\c2they will grant permament buffs depending on how rare the achievement is");
-        %client.chatmessage("\c6added more tips");
-        %client.chatmessage("\c6ores can now sometimes generate in veins");
-        %client.chatmessage("\c3--- changes ---");
-        %client.chatmessage("\c6winter event is gone");
-        %client.chatmessage("\c6changed voidstone's texture so you can actually see a damn thing in the void layer");
-        %client.chatmessage("\c6capped max starting level prestige upgrade at 5");
-        %client.chatmessage("\c6reduced health scaling for challenged digger boss");
-        %client.chatmessage("\c6rebalanced tunneler to be more viable at lower levels");
-        %client.chatmessage("\c6increased ore requirements for lower tier pickaxes");
-        %client.chatmessage("\c6/buyexp price now increases with the amount of prestige cash bonuses");
-        %client.chatmessage("\c6caves will generate slower at higher player counts to reduce server lag");
-        %client.chatmessage("\c6reworked torch placement code to be more stable");
-        %client.chatmessage("\c6removed value from dirt type ores");
-        %client.chatmessage("\c6remodelled snowglobe");
-        %client.chatmessage("\c3--- bug fixes ---");
-        %client.chatmessage("\c6fixed shopkeeper's dialogue");
-        %client.chatmessage("\c6fixed server crashing if someone has too many levels when fighting the digger boss");
-        %client.chatmessage("\c6fixed being able to trade decimal amount of ores");
-        %client.chatmessage("\c6fixed /declinetrade not prompting you with a message");
-        %client.chatmessage("\c6fixed trades being timeout'd even after declining them");
-        %client.chatmessage("\c6fixed equipped cosmetics not saving");
-        %client.chatmessage("\c6fixed real bedrock being unbreakable");
     }
 } 

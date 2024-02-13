@@ -247,15 +247,15 @@ addachievement("you can either be big digger or dig bigger", 1000000000000, "inf
 addachievement("LEVEL milestone - 1", 1, "reach level 1", 0, "miningmultiplier 1\ncashbonus 1\nexpbonus 1");
 addachievement("LEVEL milestone - 3", 3, "reach level 3", 0, "miningmultiplier 2\ncashbonus 2\nexpbonus 2");
 addachievement("LEVEL milestone - 5", 5, "reach level 5", 1, "miningmultiplier 3\ncashbonus 3\nexpbonus 3");
-addachievement("LEVEL milestone - 10", 10, "reach level 10", 1, "miningmultiplier 5\ncashbonus 5\nexpbonus 5");
-addachievement("LEVEL milestone - 15", 15, "reach level 15", 1, "miningmultiplier 7\ncashbonus 7\nexpbonus 7");
+addachievement("LEVEL milestone - 10", 10, "reach level 10", 1, "miningmultiplier 4\ncashbonus 4\nexpbonus 4");
+addachievement("LEVEL milestone - 15", 15, "reach level 15", 1, "miningmultiplier 5\ncashbonus 5\nexpbonus 5");
 addachievement("LEVEL milestone - 20", 20, "reach level 20", 2, "miningmultiplier 10\ncashbonus 10\nexpbonus 10");
 addachievement("LEVEL milestone - 25", 25, "reach level 25", 2, "miningmultiplier 5\ncashbonus 5\nexpbonus 5");
 addachievement("LEVEL milestone - 30", 30, "reach level 30", 3, "miningmultiplier 4\ncashbonus 4\nexpbonus 4");
 addachievement("LEVEL milestone - 35", 35, "reach level 35", 3, "miningmultiplier 3\ncashbonus 3\nexpbonus 3");
 addachievement("LEVEL milestone - 40", 40, "reach level 40", 4, "miningmultiplier 2\ncashbonus 2\nexpbonus 2");
 addachievement("LEVEL milestone - 45", 40, "reach level 45", 4, "miningmultiplier 2\ncashbonus 2\nexpbonus 2");
-addachievement("LEVEL milestone - 50", 40, "reach level 50", 5, "miningmultiplier 2\ncashbonus 2\nexpbonus 2");
+addachievement("LEVEL milestone - 50", 40, "reach level 50", 5, "miningmultiplier 1\ncashbonus 1\nexpbonus 1");
 // -- depth --
 addachievement("touch grass", -100, "reach the grass layer", 6, "miningpower 1");
 addachievement("new sights", 500, "mine your first ore at 500m", 0, "miningpower 1\ncashbonus 1\nexpbonus 1");
@@ -266,8 +266,8 @@ addachievement("it's getting hotter", 3000, "mine your first ore at 3000m", 2, "
 addachievement("literally minecraft", 4000, "mine your first ore at 4000m", 2, "miningpower 7\ncashbonus 10\nexpbonus 10");
 addachievement("the deep is calling", 5000, "mine your first ore at 5000m", 3, "miningpower 10\ncashbonus 15\nexpbonus 15");
 // -- money --
-addachievement("we're rich", 100, "accumulate 100 cash in total", 0, "");
-addachievement("middle class", 500, "accumulate 500 cash in total", 0, "");
+addachievement("we're rich", 100, "accumulate 100 cash in total", 0, "cashbonus 1");
+addachievement("middle class", 500, "accumulate 500 cash in total", 0, "cashbonus 1");
 addachievement("money hungry diggers", 2500, "accumulate 2500 cash in total", 0, "cashbonus 1");
 addachievement("it grows in dirt", 10000, "accumulate 10000 cash in total", 1, "cashbonus 2");
 addachievement("wealthy digger", 100000, "accumulate 100000 cash in total", 1, "cashbonus 3");
