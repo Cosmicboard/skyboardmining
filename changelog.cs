@@ -354,7 +354,7 @@ function servercmdchangelog(%client, %ver)
         %client.chatmessage("\c1--- DRILLS ---");
         %client.chatmessage("\c2the grand design allows you to construct bigger drills to do the job for you!!!");
         %client.chatmessage("\c2differences being, they use up fuel in order to keep running so they can drill by themselves");
-        %client.chatmessage("\c3--- changes ---")
+        %client.chatmessage("\c3--- changes ---");
         %client.chatmessage("\c6removed value from dirt type ores");
     }
 } 
