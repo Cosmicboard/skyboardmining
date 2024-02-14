@@ -228,21 +228,21 @@ function gameconnection::receiveRewards(%client, %reward, %reverse)
 addachievement("test", 0, "literally who", 6, "");
 // -- ore related --
 addachievement("humble digger", 100, "mine 100 blocks", 0, "miningpower 1");
-addachievement("beginner digger", 1000, "mine 1000 blocks", 0, "miningpower 1");
-addachievement("certified digger", 2500, "mine 2500 blocks", 1, "miningpower 2");
-addachievement("renowned digger", 10000, "mine 10000 blocks", 2, "miningpower 3");
-addachievement("digception", 50000, "mine 50000 blocks", 2, "miningpower 5");
-addachievement("digger boss", 100000, "mine 100000 blocks", 3, "miningpower 7");
-addachievement("earth dismantler", 250000, "mine 250000 blocks", 4, "miningpower 10");
-addachievement("destroyer of worlds", 1000000, "mine 1000000 blocks", 5, "miningpower 15");
+addachievement("beginner digger", 1000, "mine 1000 blocks", 0, "miningpower 2");
+addachievement("certified digger", 2500, "mine 2500 blocks", 1, "miningpower 3");
+addachievement("renowned digger", 10000, "mine 10000 blocks", 2, "miningpower 5");
+addachievement("digception", 50000, "mine 50000 blocks", 2, "miningpower 10");
+addachievement("digger boss", 100000, "mine 100000 blocks", 3, "miningpower 20");
+addachievement("earth dismantler", 250000, "mine 250000 blocks", 4, "miningpower 25");
+addachievement("destroyer of worlds", 1000000, "mine 1000000 blocks", 5, "miningpower 35");
 addachievement("first steps", 1000, "inflict 1000 damage to blocks", 0, "miningpower 1");
-addachievement("a lot of damage", 10000, "inflict 10000 damage to blocks", 0, "miningpower 1");
-addachievement("even more damage", 100000, "inflict 100000 damage to blocks", 1, "miningpower 2");
-addachievement("excavator", 1000000, "inflict 1 million damage to blocks", 1, "miningpower 3");
-addachievement("caves decimator", 50000000, "inflict 50 million damage to blocks", 2, "miningpower 5");
-addachievement("ores for breakfast", 250000000, "inflict 250 million damage to blocks", 3, "miningpower 7");
-addachievement("ultimate destruction", 1000000000, "inflict 1 billion damage to blocks", 4, "miningpower 10");
-addachievement("you can either be big digger or dig bigger", 1000000000000, "inflict 1 trillion damage to blocks", 5, "miningpower 15");
+addachievement("a lot of damage", 10000, "inflict 10000 damage to blocks", 0, "miningpower 2");
+addachievement("even more damage", 100000, "inflict 100000 damage to blocks", 1, "miningpower 3");
+addachievement("excavator", 1000000, "inflict 1 million damage to blocks", 1, "miningpower 5");
+addachievement("caves decimator", 50000000, "inflict 50 million damage to blocks", 2, "miningpower 10");
+addachievement("ores for breakfast", 250000000, "inflict 250 million damage to blocks", 3, "miningpower 20");
+addachievement("ultimate destruction", 1000000000, "inflict 1 billion damage to blocks", 4, "miningpower 35");
+addachievement("you can either be big digger or dig bigger", 1000000000000, "inflict 1 trillion damage to blocks", 5, "miningpower 50");
 // -- level --
 addachievement("LEVEL milestone - 1", 1, "reach level 1", 0, "miningmultiplier 1\ncashbonus 1\nexpbonus 1");
 addachievement("LEVEL milestone - 3", 3, "reach level 3", 0, "miningmultiplier 2\ncashbonus 2\nexpbonus 2");
@@ -285,8 +285,8 @@ addachievement("master digger", 25, "prestige 25 times, are you ok", 4, "");
 addachievement("unstoppable digger", 50, "prestige 50 times, you should stop", 4, "");
 addachievement("holy digger", 100, "prestige 100 times, are you satisfied enough yet", 5, "");
 // -- digger boss --
-addachievement("all your ores are belong to us", 0, "defeat the digger boss", 2, "miningpower 5\nminingmultiplier 1");
-addachievement("digger's invocation", 0, "defeat the challenged variant of the digger boss", 4, "miningpower 10\nminingmultiplier 3");
+addachievement("all your ores are belong to us", 0, "defeat the digger boss", 2, "miningpower 10\nminingmultiplier 1");
+addachievement("digger's invocation", 0, "defeat the challenged variant of the digger boss", 4, "miningpower 20\nminingmultiplier 3");
 // -- crates / vaults --
 addachievement("first impressions", 0, "open your first crate", 0, "cratedrops 1");
 addachievement("get scammed or get rich", 0, "open a total of 10 crates", 1, "cratedrops 2");
@@ -308,5 +308,5 @@ addachievement("seeking help", 0, "interact with every npc", 0, "expbonus 1");
 addachievement("shiny ore", 0, "encounter a very rare ore", 2, "expbonus 7");
 addachievement("cheat the system", 0, "spawn with level 1", 1, "expbonus 3");
 addachievement("kitted out", 0, "craft all available tools", 4, "miningmultiplier 3");
-addachievement("professional geologist", 0, "have one of every dirt piece", 2, "miningpower 2\nexpbonus 3");
-addachievement("get real", 0, "obtain reality pickaxe", 4, "miningpower 4");
+addachievement("professional geologist", 0, "have one of every dirt piece", 2, "miningpower 10\nexpbonus 3");
+addachievement("get real", 0, "obtain reality pickaxe", 4, "miningpower 25");
