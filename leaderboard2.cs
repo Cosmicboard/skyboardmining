@@ -1,3 +1,5 @@
+//old code and most likely will never use it
+
 function servercmdleaderboard(%client)
 {
     %filecount=0;

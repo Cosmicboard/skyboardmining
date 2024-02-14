@@ -1,3 +1,5 @@
+//code for generating spawns because we already got a proper cave generator
+
 function loadcave(%save, %offset, %amount, %line)
 {
     if(!$currentlygenerating)

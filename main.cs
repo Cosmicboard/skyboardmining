@@ -420,8 +420,8 @@ function placebricksaround(%position, %depth) //deprecated STOP FUCKING TRYING T
 
             if(%depth >= 6250 && getrandom(1,1500) == 1)
                 %generate = "Void Gem";
-            if(%depth <= 5000 && getrandom(1,25000) == 1)
-                %generate = "Lovely Crate";
+            //if(%depth <= 5000 && getrandom(1,25000) == 1)
+                //%generate = "Lovely Crate";
             if(%depth >= 1000 && getrandom(1,75000) == 1)
                 %generate = "Forbidden Key";
             if(%depth >= 2250 && getrandom(1,250000) == 1)

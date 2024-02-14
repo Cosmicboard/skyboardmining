@@ -318,10 +318,10 @@ function servercmdchangelog(%client, %ver)
         %client.chatmessage("\c6rebalanced tunneler to be more viable at lower levels");
         %client.chatmessage("\c6increased ore requirements for lower tier pickaxes");
         %client.chatmessage("\c6improved pickaxe shop house model");
+        %client.chatmessage("\c6moved npc stands closer to each other");
         %client.chatmessage("\c6/buyexp price now increases with the amount of prestige cash bonuses");
         %client.chatmessage("\c6caves will generate slower at higher player counts to reduce server lag");
         %client.chatmessage("\c6reworked torch placement code to be more stable");
-        %client.chatmessage("\c6removed value from dirt type ores");
         %client.chatmessage("\c6remodelled snowglobe");
         %client.chatmessage("\c3--- bug fixes ---");
         %client.chatmessage("\c6fixed incorrect leaderboard prestige points scaling (for real this time holy shit)");
@@ -354,5 +354,7 @@ function servercmdchangelog(%client, %ver)
         %client.chatmessage("\c1--- DRILLS ---");
         %client.chatmessage("\c2the grand design allows you to construct bigger drills to do the job for you!!!");
         %client.chatmessage("\c2differences being, they use up fuel in order to keep running so they can drill by themselves");
+        %client.chatmessage("\c3--- changes ---")
+        %client.chatmessage("\c6removed value from dirt type ores");
     }
 } 

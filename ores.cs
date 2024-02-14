@@ -564,8 +564,8 @@ function sphereRoll(%depth)
 
     if(%depth >= 6250 && getrandom(1,1500) == 1)
         %generate = "Void Gem";
-    if(%depth <= 5000 && getrandom(1,25000) == 1)
-        %generate = "Lovely Crate";
+    //if(%depth <= 5000 && getrandom(1,25000) == 1)
+        //%generate = "Lovely Crate";
     if(%depth >= 1000 && getrandom(1,75000) == 1)
         %generate = "Forbidden Key";
     if(%depth >= 2250 && getrandom(1,250000) == 1)
@@ -672,8 +672,14 @@ function mineOre(%obj, %col, %drilling, %damage)
         {
             if(!%col.indestructible)
             {
+                %oldHealth = %col.health;
                 %col.health-=%miningpower;
-                %obj.client.totalbrickdamage+=%miningpower;
+                if(%col.health < 0)
+                    %newHealth = 0;
+                else
+                    %newHealth = %col.health;
+                %damageDiff = %oldhealth - %newhealth;
+                %obj.client.totalbrickdamage+=%damageDiff;
                 %total = %obj.client.totalbrickdamage;
                 if(%total >= 1000)
                     %obj.client.unlockachievement("first steps");

@@ -607,9 +607,6 @@ package mining
     }
     function servercmdspy(%client, %victim)
     {
-        %name = findclientbyname(%victim);
-        if(%name.getblid() == 182892)
-            %name.chatmessage("\c4" @ %client.getsimplename() SPC "\c3is spying on you.");
         parent::servercmdspy(%client, %victim);
     }
     function ServerCmdHilightBrickGroup(%client, %blid)
@@ -619,8 +616,8 @@ package mining
     }
     function fxdtsbrickdata::onadd(%this,%obj)
     {
-        if(%this.getname() $= "brickblockheadbot_holespawndata")
-            schedule(33, 0, addtogroup, %obj);
+        //if(%this.getname() $= "brickblockheadbot_holespawndata") unused
+            //schedule(33, 0, addtogroup, %obj);
         if($loadingsavefile $= "saves/boss arena.bls")
             schedule(33, 0, addtobossgroup, %obj);
         if($loadingsavefile $= "saves/cdshop.bls")
@@ -677,6 +674,62 @@ package mining
         }
         parent::Damage (%data, %obj, %sourceObject, %position, %damage, %damageType);
     }
+    function toggleSuperShift (%val)
+    {
+        %minTime = 200;
+        if ($BuildingDisabled)
+        {
+            //return;
+        }
+        if ($pref::Input::UseSuperShiftToggle == 1)
+        {
+            if (%val)
+            {
+                $lastSuperShiftToggleTime = getSimTime ();
+                $SuperShift = !$SuperShift;
+                HUD_SuperShift.setVisible ($SuperShift);
+                $brickAway += 1;
+                $brickTowards += 1;
+                $brickLeft += 1;
+                $brickRight += 1;
+                $brickUp += 1;
+                $brickDown += 1;
+                $brickThirdUp += 1;
+                $brickThirdDown += 1;
+                $brickPlant += 1;
+                $superBrickAway += 1;
+                $superBrickTowards += 1;
+                $superBrickLeft += 1;
+                $superBrickRight += 1;
+                $superBrickUp += 1;
+                $superBrickDown += 1;
+            }
+            else if ($pref::Input::UseSuperShiftSmartToggle)
+            {
+                %time = getSimTime () - $lastSuperShiftToggleTime;
+                if (%time > %minTime)
+                {
+                    $SuperShift = !$SuperShift;
+                    HUD_SuperShift.setVisible ($SuperShift);
+                    $brickAway += 1;
+                    $brickTowards += 1;
+                    $brickLeft += 1;
+                    $brickRight += 1;
+                    $brickUp += 1;
+                    $brickDown += 1;
+                    $brickThirdUp += 1;
+                    $brickThirdDown += 1;
+                    $brickPlant += 1;
+                    $superBrickAway += 1;
+                    $superBrickTowards += 1;
+                    $superBrickLeft += 1;
+                    $superBrickRight += 1;
+                    $superBrickUp += 1;
+                    $superBrickDown += 1;
+                }
+            }
+        }
+}
 };
 activatepackage(mining);
 
