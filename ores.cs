@@ -33,16 +33,16 @@ $maximumDepth = 6250;
 
 //-----  0   -----    1   -----   2   -----  3  -----     4     -----   5   -----    6    -----    7    -----    8    -----   9    -----     10    -----    11     -----   12    -----       13       -----
 //----- name ----- health ----- money ----- exp ----- level req ----- color ----- colorfx ----- shapefx ----- printid ----- rarity ----- min spawn ----- max spawn ----- special ----- indestructible -----
-registerOre("Grass", "15", "0", "0", "0", "27", "0", "0", "modter/grass", "0", "-100", "0", "IGNORE");
-registerOre("Dirt", "30", "0", "1", "0", "1", "0", "0", "modter/sand03", "0", "-100", "200", "IGNORE");
-registerOre("Dense Dirt", "125", "0", "2", "0", "2", "0", "0", "modter/sand03", "0", "200", "500", "IGNORE");
-registerOre("Stone", "750", "0", "4", "3", "4", "0", "0", "modter/rock", "0", "500", "1000", "IGNORE");
-registerOre("Dense Stone", "2500", "0", "6", "7", "5", "0", "0", "modter/rock", "0", "1000", "1500", "IGNORE");
-registerOre("Bedrock", "7500", "0", "10", "8", "16", "0", "0", "modter/old_stone_road", "0", "1500", "2250", "IGNORE");
-registerOre("Mantle", "20000", "0", "15", "13", "7", "0", "0", "modter/ground", "0", "2250", "3000", "IGNORE");
-registerOre("Core", "50000", "0", "25", "18", "8", "0", "0", "modter/ground", "0", "3000", "4000", "IGNORE");
-registerOre("Netherrack", "100000", "0", "40", "24", "10", "0", "0", "modter/ground", "0", "4000", "5000", "IGNORE");
-registerOre("Voidstone", "250000", "0", "100", "35", "63", "0", "0", "modter/brickramp", "0", "5000", "6250", "IGNORE");
+registerOre("Grass", "15", "0.05", "0", "0", "27", "0", "0", "modter/grass", "0", "-100", "0", "IGNORE");
+registerOre("Dirt", "30", "0.1", "1", "0", "1", "0", "0", "modter/sand03", "0", "-100", "200", "IGNORE");
+registerOre("Dense Dirt", "125", "0.25", "2", "0", "2", "0", "0", "modter/sand03", "0", "200", "500", "IGNORE");
+registerOre("Stone", "750", "1", "2", "3", "4", "0", "0", "modter/rock", "0", "500", "1000", "IGNORE");
+registerOre("Dense Stone", "2500", "2.5", "6", "7", "5", "0", "0", "modter/rock", "0", "1000", "1500", "IGNORE");
+registerOre("Bedrock", "7500", "6.25", "10", "8", "16", "0", "0", "modter/old_stone_road", "0", "1500", "2250", "IGNORE");
+registerOre("Mantle", "20000", "15", "15", "13", "7", "0", "0", "modter/ground", "0", "2250", "3000", "IGNORE");
+registerOre("Core", "50000", "32.5", "25", "18", "8", "0", "0", "modter/ground", "0", "3000", "4000", "IGNORE");
+registerOre("Netherrack", "100000", "75", "40", "24", "10", "0", "0", "modter/ground", "0", "4000", "5000", "IGNORE");
+registerOre("Voidstone", "250000", "200", "100", "35", "63", "0", "0", "modter/brickramp", "0", "5000", "6250", "IGNORE");
 registerOre("Coal", "150", "5", "8", "0", "16", "0", "0", "modter/sand03", "30", "-100", "500");
 registerOre("Ionized Coal", "2500", "75", "120", "0", "16", "1", "0", "modter/sand03", "0", "-100", "500", "IGNORE");
 registerOre("Tin", "200", "6", "12", "0", "11", "0", "0", "modter/sand03", "27", "-75", "500");
@@ -777,6 +777,8 @@ function mineOre(%obj, %col, %drilling, %damage)
 		{
             if(%drilling)
                 %obj.drillbrick++;
+            if(getfield($ore[%col.oreid],0) $= "Void Gem" || getfield($ore[%col.oreid],0) $= "Forbidden Key" || getfield($ore[%col.oreid],0) $= "Challenger's Key")
+                %obj.client.unlockachievement("shiny ore");
             if(getfield($ore[%col.oreid],12) !$= "LAVA")
             {
                 %col.brickdigged = 1;
