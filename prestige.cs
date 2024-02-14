@@ -147,8 +147,8 @@ function gameconnection::respecPrestigePoints(%client, %count)
 {
     %mpu = %client.prestigeminingpower/5;
     %mmu = mfloatlength(%client.prestigeminingmultiplier/0.05,0);
-    %eu= %client.prestigeexpbonus/0.1;
-    %cu = %client.prestigecashbonus/0.1;
+    %eu= %client.prestigeexpbonus/0.05;
+    %cu = %client.prestigecashbonus/0.05;
     %cdu = %client.prestigecratedrops/0.1;
     %slu = %client.prestigestartlevel;
     %mmmu = %client.prestigemaxmining/0.1;
@@ -185,25 +185,25 @@ function gameconnection::respecPrestigePoints(%client, %count)
     {
         if(!%count)
         {
-            %client.prestigeexpbonus -= 0.1;
+            %client.prestigeexpbonus -= 0.05;
             if(%client.prestigeexpbonus < 0)
                 %client.prestigeexpbonus = 0;
-            %client.prestigepoints += 1 + mfloatlength(mpow((%client.prestigeexpbonus*100/4),1.08),0);
+            %client.prestigepoints += 1 + mfloatlength(mpow((%client.prestigeexpbonus*200/4),1.08),0);
         }
         else
-            %points += 1 + mfloatlength(mpow(((%i-1)*10/4),1.08),0);
+            %points += 1 + mfloatlength(mpow(((%i-1)*20/4),1.08),0);
     }
     for(%i = 1; %i <= %cu; %i++)
     {
         if(!%count)
         {
-            %client.prestigecashbonus -= 0.1;
+            %client.prestigecashbonus -= 0.05;
             if(%client.prestigecashbonus < 0)
                 %client.prestigecashbonus = 0;
-            %client.prestigepoints += 1 + mfloatlength(mpow((%client.prestigecashbonus*100/4),1.08),0);
+            %client.prestigepoints += 1 + mfloatlength(mpow((%client.prestigecashbonus*200/4),1.08),0);
         }
         else
-            %points += 1 + mfloatlength(mpow(((%i-1)*10/4),1.08),0);
+            %points += 1 + mfloatlength(mpow(((%i-1)*20/4),1.08),0);
     }
     for(%i = 1; %i <= %cdu; %i++)
     {
@@ -315,13 +315,13 @@ function gameconnection::showPrestigeStats(%client, %option)
     }
     else if(%option == 2)
     {
-        %price = 1 + mfloatlength(mpow((%client.prestigeexpbonus*100/4),1.08),0);
-        %client.centerprint("<font:arial bold:26>\c6+10% Bonus Exp Multiplier" NL "\c3Price:" SPC %price NL "<font:arial bold:20>\c5You currently have:" SPC mfloor(%client.prestigeexpbonus*100) @ "%" NL "\c2Prestige Points:" SPC %client.prestigepoints,1);
+        %price = 1 + mfloatlength(mpow((%client.prestigeexpbonus*200/4),1.08),0);
+        %client.centerprint("<font:arial bold:26>\c6+5% Bonus Exp Multiplier" NL "\c3Price:" SPC %price NL "<font:arial bold:20>\c5You currently have:" SPC mfloor(%client.prestigeexpbonus*100) @ "%" NL "\c2Prestige Points:" SPC %client.prestigepoints,1);
     }
     else if(%option == 3)
     {
-        %price = 1 + mfloatlength(mpow((%client.prestigecashbonus*100/4),1.08),0);
-        %client.centerprint("<font:arial bold:26>\c6+10% Bonus Cash Multiplier" NL "\c3Price:" SPC %price NL "<font:arial bold:20>\c5You currently have:" SPC mfloor(%client.prestigecashbonus*100) @ "%" NL "\c2Prestige Points:" SPC %client.prestigepoints,1);
+        %price = 1 + mfloatlength(mpow((%client.prestigecashbonus*200/4),1.08),0);
+        %client.centerprint("<font:arial bold:26>\c6+5% Bonus Cash Multiplier" NL "\c3Price:" SPC %price NL "<font:arial bold:20>\c5You currently have:" SPC mfloor(%client.prestigecashbonus*100) @ "%" NL "\c2Prestige Points:" SPC %client.prestigepoints,1);
     }
     else if(%option == 4)
     {
@@ -406,7 +406,7 @@ function gameconnection::purchasePrestigeUpgrade(%client, %option)
     }
     else if(%option == 2)
     {
-        %price = 1 + mfloatlength(mpow((%client.prestigeexpbonus*100/4),1.08),0);
+        %price = 1 + mfloatlength(mpow((%client.prestigeexpbonus*200/4),1.08),0);
         if(%client.prestigepoints < %price)
         {
             %client.chatmessage("no money no funny");
@@ -414,13 +414,13 @@ function gameconnection::purchasePrestigeUpgrade(%client, %option)
             return;
         }
         %client.prestigepoints -= %price;
-        %client.prestigeexpbonus += 0.1;
+        %client.prestigeexpbonus += 0.05;
         %client.chatmessage("\c2Successfully upgraded Bonus Exp Multiplier to\c4" SPC %client.prestigeexpbonus*100 @ "%%\c2!");
         %client.playsound(beep_key_sound);
     }
     else if(%option == 3)
     {
-        %price = 1 + mfloatlength(mpow((%client.prestigecashbonus*100/4),1.08),0);
+        %price = 1 + mfloatlength(mpow((%client.prestigecashbonus*200/4),1.08),0);
         if(%client.prestigepoints < %price)
         {
             %client.chatmessage("no money no funny");
@@ -428,7 +428,7 @@ function gameconnection::purchasePrestigeUpgrade(%client, %option)
             return;
         }
         %client.prestigepoints -= %price;
-        %client.prestigecashbonus += 0.1;
+        %client.prestigecashbonus += 0.05;
         %client.chatmessage("\c2Successfully upgraded Bonus Cash Multiplier to\c4" SPC %client.prestigecashbonus*100 @ "%%\c2!");
         %client.playsound(beep_key_sound);
     }
