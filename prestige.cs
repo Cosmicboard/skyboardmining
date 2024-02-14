@@ -176,10 +176,10 @@ function gameconnection::respecPrestigePoints(%client, %count)
             %client.prestigeminingmultiplier -= 0.05;
             if(%client.prestigeminingmultiplier < 0)
                 %client.prestigeminingmultiplier = 0;
-            %client.prestigepoints += 10 + (%client.prestigeminingmultiplier*400) - (2 * ((%client.prestigeminingmultiplier*100)/5));
+            %client.prestigepoints += 5 + mfloatlength(mpow((%client.prestigeminingmultiplier*450),1.05),0);
         }
         else
-            %points += 3 + ((%i-1)*40) - (2 * (%i-1));
+            %points += 5 + mfloatlength(mpow(((%i-1)*45),1.05),0);
     }
     for(%i = 1; %i <= %eu; %i++)
     {
@@ -236,10 +236,10 @@ function gameconnection::respecPrestigePoints(%client, %count)
             %client.prestigemaxmining -= 0.1;
             if(%client.prestigemaxmining < 0)
                 %client.prestigemaxmining = 0;
-            %client.prestigepoints += 1 + mfloatlength((mpow(%client.prestigemaxmining*100,1.15)/1.5),0);
+            %client.prestigepoints += 1 + mfloatlength((mpow(%client.prestigemaxmining*175,1.15)/1.5),0);
         }
         else
-            %points += 1 + mfloatlength((mpow((%i-1)*10,1.15)/1.5),0);
+            %points += 3 + mfloatlength((mpow((%i-1)*17.5,1.15)/1.5),0);
     }
     for(%i = 1; %i <= %pu; %i++)
     {
@@ -310,7 +310,7 @@ function gameconnection::showPrestigeStats(%client, %option)
     }
     else if(%option == 1)
     {
-        %price = 10 + (%client.prestigeminingmultiplier*400) - (2 * ((%client.prestigeminingmultiplier*100)/5));
+        %price = 5 + mfloatlength(mpow((%client.prestigeminingmultiplier*450),1.05),0);
         %client.centerprint("<font:arial bold:26>\c6+5% Bonus Mining Multiplier" NL "\c3Price:" SPC %price NL "<font:arial bold:20>\c5You currently have:" SPC mfloor(%client.prestigeminingmultiplier*100) @ "%" NL "\c2Prestige Points:" SPC %client.prestigepoints,1);
     }
     else if(%option == 2)
@@ -335,7 +335,7 @@ function gameconnection::showPrestigeStats(%client, %option)
     }
     else if(%option == 6)
     {
-        %price = 1 + mfloatlength((mpow(%client.prestigemaxmining*100,1.15)/1.5),0);
+        %price = 3 + mfloatlength((mpow(%client.prestigemaxmining*175,1.15)/1.5),0);
         %client.centerprint("<font:arial bold:26>\c6+10% Max Mining Multiplier" NL "\c3Price:" SPC %price NL "<font:arial bold:20>\c5You currently have:" SPC 200 + mfloor(%client.prestigemaxmining*100) @ "%" NL "\c2Prestige Points:" SPC %client.prestigepoints,1);
     }
     else if(%option == 7)
@@ -392,7 +392,7 @@ function gameconnection::purchasePrestigeUpgrade(%client, %option)
     }
     else if(%option == 1)
     {
-        %price = 10 + (%client.prestigeminingmultiplier*400) - (2 * ((%client.prestigeminingmultiplier*100)/5));
+        %price = 5 + mfloatlength(mpow((%client.prestigeminingmultiplier*450),1.05),0);
         if(%client.prestigepoints < %price)
         {
             %client.chatmessage("no money no funny");
@@ -473,7 +473,7 @@ function gameconnection::purchasePrestigeUpgrade(%client, %option)
     }
     else if(%option == 6)
     {
-        %price = 1 + mfloatlength((mpow(%client.prestigemaxmining*100,1.15)/1.5),0);
+        %price = 3 + mfloatlength((mpow(%client.prestigemaxmining*175,1.15)/1.5),0);
         if(%client.prestigepoints < %price)
         {
             %client.chatmessage("no money no funny");
